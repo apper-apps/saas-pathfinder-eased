@@ -183,23 +183,23 @@ const handleRestart = () => {
     )
   }
 
-  return (
-    <div className="space-y-12">
+return (
+    <div className="space-y-8 sm:space-y-12">
       {/* Hero Section */}
-      <div className="text-center space-y-6 py-12">
+      <div className="text-center space-y-4 sm:space-y-6 py-8 sm:py-12 px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-4"
+          className="space-y-3 sm:space-y-4"
         >
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary-600 via-secondary-500 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary-600 via-secondary-500 to-purple-600 bg-clip-text text-transparent leading-tight">
             Find Your Ideal SaaS Builder
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
             Navigate through our feature-based roadmap to discover which platform matches your development needs. 
             Get personalized recommendations based on what matters most to your project.
           </p>
-</motion.div>
+        </motion.div>
       </div>
 
       {/* Progress Bar */}
@@ -227,28 +227,28 @@ const handleRestart = () => {
           </motion.div>
 )}
 
-        {currentStep === 'confirmation' && (
+{currentStep === 'confirmation' && (
           <motion.div
             key="confirmation"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8 px-4"
           >
-            <div className="text-center space-y-3">
+            <div className="text-center space-y-2 sm:space-y-3">
               <div className="inline-flex items-center space-x-2 text-primary-600 mb-2">
                 <span className="text-sm font-medium uppercase tracking-wide">Review</span>
               </div>
-              <h2 className="text-3xl font-bold text-gray-900">Review Your Selected Features</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 px-4">Review Your Selected Features</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto px-4">
                 Please review your feature selections before we analyze the best platform for your needs.
               </p>
             </div>
 
             <div className="max-w-3xl mx-auto">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-6">Selected Features ({selectedFeatures.length})</h3>
-                <div className="grid gap-4 mb-8">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-8">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Selected Features ({selectedFeatures.length})</h3>
+                <div className="grid gap-3 sm:gap-4 mb-6 sm:mb-8">
                   {getSelectedFeatureLabels().map((featureLabel, index) => (
                     <motion.div
                       key={featureLabel}
@@ -257,24 +257,24 @@ const handleRestart = () => {
                       transition={{ delay: index * 0.1 }}
                       className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg"
                     >
-                      <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
-                      <span className="text-gray-800 font-medium">{featureLabel}</span>
+                      <div className="w-2 h-2 bg-primary-500 rounded-full flex-shrink-0"></div>
+                      <span className="text-gray-800 font-medium text-sm sm:text-base">{featureLabel}</span>
                     </motion.div>
                   ))}
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center">
                   <Button
                     variant="outline"
                     onClick={() => setCurrentStep('selection')}
-                    className="flex items-center space-x-2"
+                    className="flex items-center justify-center space-x-2 mobile-button"
                   >
                     <ApperIcon name="ArrowLeft" size={16} />
                     <span>Go Back & Modify</span>
                   </Button>
                   <Button
                     onClick={handleConfirmContinue}
-                    className="flex items-center space-x-2"
+                    className="flex items-center justify-center space-x-2 mobile-button"
                   >
                     <span>Continue to Analysis</span>
                     <ApperIcon name="ArrowRight" size={16} />
@@ -284,25 +284,25 @@ const handleRestart = () => {
             </div>
           </motion.div>
         )}
-        {currentStep === 'comparison' && (
+{currentStep === 'comparison' && (
           <motion.div
             key="comparison"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8 px-4"
           >
-            <div className="text-center space-y-3">
+            <div className="text-center space-y-2 sm:space-y-3">
               <div className="inline-flex items-center space-x-2 text-primary-600 mb-2">
                 <span className="text-sm font-medium uppercase tracking-wide">Step 2</span>
               </div>
-              <h2 className="text-3xl font-bold text-gray-900">Based on your needs, here's how they compare</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 px-4">Based on your needs, here's how they compare</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto px-4">
                 We're analyzing each feature you selected to show you detailed comparisons between platforms.
               </p>
             </div>
 
-<div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {comparisons
                 .filter(comp => selectedFeatures.includes(comp.featureId))
                 .map((comparison) => (
@@ -321,16 +321,16 @@ const handleRestart = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="flex justify-center pt-8"
+                  className="flex justify-center pt-6 sm:pt-8"
                 >
-                  <div className="text-center space-y-4">
-                    <p className="text-gray-600 max-w-md mx-auto">
+                  <div className="text-center space-y-4 px-4">
+                    <p className="text-gray-600 max-w-md mx-auto text-sm sm:text-base">
                       Analysis complete! Review the comparisons above and proceed when you're ready to see our recommendation.
                     </p>
                     <Button
                       onClick={handleProceedToRecommendation}
                       size="lg"
-                      className="flex items-center space-x-2"
+                      className="flex items-center justify-center space-x-2 mobile-button"
                     >
                       <span>View Final Recommendation</span>
                       <ApperIcon name="ArrowRight" size={16} />

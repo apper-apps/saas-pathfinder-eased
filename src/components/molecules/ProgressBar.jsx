@@ -16,15 +16,15 @@ const steps = [
 
   const currentStepIndex = getCurrentStepIndex()
 
-  return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-8">
+return (
+    <div className="w-full max-w-4xl mx-auto px-4 py-4 sm:py-8">
       <div className="flex items-center justify-between relative">
         {/* Progress Line Background */}
-        <div className="absolute top-6 left-0 w-full h-0.5 bg-gray-200 z-0" />
+        <div className="absolute top-5 sm:top-6 left-0 w-full h-0.5 bg-gray-200 z-0" />
         
         {/* Progress Line Fill */}
-<motion.div 
-          className="absolute top-6 left-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 z-10"
+        <motion.div 
+          className="absolute top-5 sm:top-6 left-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 z-10"
           initial={{ width: '0%' }}
           animate={{ 
             width: currentStepIndex === 0 ? '0%' : 
@@ -44,7 +44,7 @@ const steps = [
               {/* Step Circle */}
               <motion.div
                 className={`
-                  w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300
+                  w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300
                   ${isCompleted 
                     ? 'bg-gradient-to-r from-primary-500 to-secondary-500 border-transparent text-white' 
                     : isCurrent 
@@ -58,21 +58,21 @@ const steps = [
                 whileHover={{ scale: 1.05 }}
               >
                 {isCompleted ? (
-                  <ApperIcon name="Check" size={20} />
+                  <ApperIcon name="Check" size={18} className="sm:w-5 sm:h-5" />
                 ) : (
-                  <span className="font-semibold">{step.number}</span>
+                  <span className="font-semibold text-sm sm:text-base">{step.number}</span>
                 )}
               </motion.div>
 
               {/* Step Label */}
               <motion.div
-                className="mt-3 text-center"
+                className="mt-2 sm:mt-3 text-center"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.2 }}
               >
                 <p className={`
-                  text-sm font-medium transition-colors duration-300
+                  text-xs sm:text-sm font-medium transition-colors duration-300 px-1
                   ${isCurrent 
                     ? 'text-primary-600' 
                     : isCompleted 
@@ -80,7 +80,8 @@ const steps = [
                     : 'text-gray-400'
                   }
                 `}>
-                  {step.label}
+                  <span className="hidden sm:inline">{step.label}</span>
+                  <span className="sm:hidden">{step.label.split(' ')[0]}</span>
                 </p>
               </motion.div>
             </div>
