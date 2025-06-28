@@ -39,9 +39,8 @@ const Layout = ({ children }) => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {children}
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+{/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 bg-[url('https://apper.io/images/footer-bg.svg')] bg-cover bg-center bg-no-repeat">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
