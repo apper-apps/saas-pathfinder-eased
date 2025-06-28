@@ -23,16 +23,6 @@ export const featuresData = [
     Id: 5,
     id: 'integrations',
     label: 'Do you want Integrations & Analytics with pre-built connections and team management?'
-  },
-  {
-    Id: 6,
-    id: 'analytics',
-    label: 'Do you need real-time Usage Analytics and monitoring dashboards?'
-  },
-  {
-    Id: 7,
-    id: 'no-code',
-    label: 'Do you prefer a No-code or Visual Builder Experience?'
   }
 ]
 
@@ -40,12 +30,12 @@ export const comparisonsData = [
   {
     Id: 1,
     featureId: 'ai-ui',
-    title: 'AI-Powered UI Generation',
+    title: 'Core App Building',
     rows: [
       {
         label: 'AI-Powered UI Generation',
-        apperValue: 'Yes',
-        lovableValue: 'Yes',
+        apperValue: '✔️',
+        lovableValue: '✔️',
         apperStatus: 'yes',
         lovableStatus: 'yes'
       }
@@ -56,7 +46,7 @@ export const comparisonsData = [
   {
     Id: 2,
     featureId: 'backend-auth',
-    title: 'Backend & Database',
+    title: 'Core App Building',
     rows: [
       {
         label: 'Backend & Database',
@@ -90,14 +80,14 @@ export const comparisonsData = [
       },
       {
         label: 'Connection Pooling',
-        apperValue: 'Yes',
+        apperValue: '✔️',
         lovableValue: 'Shared resources issues',
         apperStatus: 'yes',
         lovableStatus: 'no'
       },
       {
         label: 'Audit Logs',
-        apperValue: 'Built-in',
+        apperValue: '✔️',
         lovableValue: 'Manual pgaudit setup',
         apperStatus: 'yes',
         lovableStatus: 'warning'
@@ -120,14 +110,14 @@ export const comparisonsData = [
       },
       {
         label: 'Usage Limits & Credits',
-        apperValue: 'Built-in',
+        apperValue: '✔️',
         lovableValue: 'Custom code required',
         apperStatus: 'yes',
         lovableStatus: 'no'
       },
       {
         label: 'Coupons & Promotions',
-        apperValue: 'Built-in',
+        apperValue: '✔️',
         lovableValue: 'Manual Stripe setup',
         apperStatus: 'yes',
         lovableStatus: 'warning'
@@ -143,73 +133,27 @@ export const comparisonsData = [
     rows: [
       {
         label: 'Pre-built Integrations',
-        apperValue: '1,300+',
-        lovableValue: '~12',
+        apperValue: '1,300+ One-click setup',
+        lovableValue: '~12 Limited options',
         apperStatus: 'yes',
         lovableStatus: 'warning'
       },
       {
         label: 'Usage Analytics',
-        apperValue: 'Built-in',
+        apperValue: '✔️',
         lovableValue: 'External BI tools',
         apperStatus: 'yes',
         lovableStatus: 'warning'
       },
       {
         label: 'Team Management',
-        apperValue: 'Native',
+        apperValue: '✔️',
         lovableValue: 'Via Clerk integration',
         apperStatus: 'yes',
         lovableStatus: 'warning'
       }
     ],
     winner: 'Apper',
-    reasoning: 'Apper offers 1,300+ pre-built integrations, native analytics, and built-in team management, compared to Lovable\'s limited 12 integrations and external tool requirements.'
-  },
-  {
-    Id: 6,
-    featureId: 'analytics',
-    title: 'Real-time Usage Analytics',
-    rows: [
-      {
-        label: 'Usage Analytics',
-        apperValue: 'Built-in dashboard',
-        lovableValue: 'External BI tools',
-        apperStatus: 'yes',
-        lovableStatus: 'no'
-      },
-      {
-        label: 'Real-time Monitoring',
-        apperValue: 'Yes',
-        lovableValue: 'Custom implementation',
-        apperStatus: 'yes',
-        lovableStatus: 'warning'
-      }
-    ],
-    winner: 'Apper',
-    reasoning: 'Apper includes built-in analytics dashboards and real-time monitoring, while Lovable requires external BI tools and custom implementation for analytics.'
-  },
-  {
-    Id: 7,
-    featureId: 'no-code',
-    title: 'No-code or Visual Builder Experience',
-    rows: [
-      {
-        label: 'Visual Builder',
-        apperValue: 'Complete no-code experience',
-        lovableValue: 'Code-first approach',
-        apperStatus: 'yes',
-        lovableStatus: 'no'
-      },
-      {
-        label: 'Configuration',
-        apperValue: 'Visual interface',
-        lovableValue: 'Config files',
-        apperStatus: 'yes',
-        lovableStatus: 'warning'
-      }
-    ],
-    winner: 'Apper',
-    reasoning: 'Apper provides a complete no-code visual builder experience with visual configuration, while Lovable follows a code-first approach requiring configuration files.'
+    reasoning: 'Apper offers 1,300+ pre-built integrations with one-click setup, native analytics, and built-in team management, compared to Lovable\'s limited 12 integrations and external tool requirements.'
   }
 ]
