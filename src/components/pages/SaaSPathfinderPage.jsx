@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { toast } from 'react-toastify'
-import FeatureSelector from '@/components/organisms/FeatureSelector'
-import ProgressBar from '@/components/molecules/ProgressBar'
-import ComparisonSection from '@/components/organisms/ComparisonSection'
-import FinalRecommendation from '@/components/organisms/FinalRecommendation'
-import Loading from '@/components/ui/Loading'
-import Error from '@/components/ui/Error'
-import { getFeatures, getComparisons } from '@/services/api/pathfinderService'
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import FeatureSelector from "@/components/organisms/FeatureSelector";
+import ComparisonSection from "@/components/organisms/ComparisonSection";
+import FinalRecommendation from "@/components/organisms/FinalRecommendation";
+import Button from "@/components/atoms/Button";
+import ProgressBar from "@/components/molecules/ProgressBar";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import { getComparisons, getFeatures } from "@/services/api/pathfinderService";
+import { comparisonsData, featuresData } from "@/services/mockData/pathfinderData";
 
 const SaaSPathfinderPage = () => {
   const [features, setFeatures] = useState([])
@@ -58,11 +61,16 @@ const SaaSPathfinderPage = () => {
     )
   }
 
-  const handleContinue = () => {
+const handleContinue = () => {
     if (selectedFeatures.length > 0) {
-      setCurrentStep('comparison')
-      toast.success(`Analyzing ${selectedFeatures.length} selected features`)
+      setCurrentStep('confirmation')
+      toast.success(`${selectedFeatures.length} features selected`)
     }
+  }
+
+  const handleConfirmContinue = () => {
+    setCurrentStep('comparison')
+    toast.success(`Analyzing ${selectedFeatures.length} selected features`)
   }
 
   const showComparisonsProgressively = () => {
@@ -173,8 +181,65 @@ const calculateRecommendation = () => {
               canContinue={selectedFeatures.length > 0}
             />
           </motion.div>
-        )}
+)}
 
+        {currentStep === 'confirmation' && (
+          <motion.div
+            key="confirmation"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="space-y-8"
+          >
+            <div className="text-center space-y-3">
+              <div className="inline-flex items-center space-x-2 text-primary-600 mb-2">
+                <span className="text-sm font-medium uppercase tracking-wide">Review</span>
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900">Review Your Selected Features</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Please review your feature selections before we analyze the best platform for your needs.
+              </p>
+            </div>
+
+            <div className="max-w-3xl mx-auto">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+                <h3 className="text-lg font-semibold text-gray-900 mb-6">Selected Features ({selectedFeatures.length})</h3>
+                <div className="grid gap-4 mb-8">
+                  {getSelectedFeatureLabels().map((featureLabel, index) => (
+                    <motion.div
+                      key={featureLabel}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg"
+                    >
+                      <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                      <span className="text-gray-800 font-medium">{featureLabel}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button
+                    variant="outline"
+                    onClick={() => setCurrentStep('selection')}
+                    className="flex items-center space-x-2"
+                  >
+                    <ApperIcon name="ArrowLeft" size={16} />
+                    <span>Go Back & Modify</span>
+                  </Button>
+                  <Button
+                    onClick={handleConfirmContinue}
+                    className="flex items-center space-x-2"
+                  >
+                    <span>Continue to Analysis</span>
+                    <ApperIcon name="ArrowRight" size={16} />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
         {currentStep === 'comparison' && (
           <motion.div
             key="comparison"
