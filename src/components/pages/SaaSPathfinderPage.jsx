@@ -79,20 +79,26 @@ const SaaSPathfinderPage = () => {
     })
   }
 
-  const calculateRecommendation = () => {
+const calculateRecommendation = () => {
     const relevantComparisons = comparisons.filter(comp => 
       selectedFeatures.includes(comp.featureId)
     )
 
-    const apperWins = relevantComparisons.filter(comp => comp.winner === 'Apper').length
-    const lovableWins = relevantComparisons.filter(comp => comp.winner === 'Lovable').length
-    const ties = relevantComparisons.filter(comp => comp.winner === 'Tie').length
-
-    // Apper wins if it has more wins or equal wins with fewer required integrations
-    if (apperWins > lovableWins || (apperWins === lovableWins && ties > 0)) {
-      setFinalRecommendation('Apper')
-    } else {
+    // If user selected mostly "No" (fewer than half of available features), recommend Lovable
+    if (selectedFeatures.length < features.length / 2) {
       setFinalRecommendation('Lovable')
+    } else {
+      // Use comparison-based logic for users who need many features
+      const apperWins = relevantComparisons.filter(comp => comp.winner === 'Apper').length
+      const lovableWins = relevantComparisons.filter(comp => comp.winner === 'Lovable').length
+      const ties = relevantComparisons.filter(comp => comp.winner === 'Tie').length
+
+      // Apper wins if it has more wins or equal wins with ties
+      if (apperWins > lovableWins || (apperWins === lovableWins && ties > 0)) {
+        setFinalRecommendation('Apper')
+      } else {
+        setFinalRecommendation('Lovable')
+      }
     }
 
     // Show final recommendation after all comparisons are visible
