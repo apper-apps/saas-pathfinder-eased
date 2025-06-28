@@ -1,9 +1,11 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import Button from '@/components/atoms/Button'
 import ApperIcon from '@/components/ApperIcon'
 
 const FinalRecommendation = ({ recommendation, selectedFeatures, onRestart }) => {
+  const navigate = useNavigate()
   const isApperRecommended = recommendation === 'Apper'
 
   return (
@@ -69,8 +71,8 @@ const FinalRecommendation = ({ recommendation, selectedFeatures, onRestart }) =>
 <div className="flex flex-wrap justify-center gap-4 pt-4">
                       <Button 
                         variant="success" 
-                        icon="ExternalLink"
-                        onClick={() => window.open('https://apper.io/prime-club', '_blank')}
+                        icon="BarChart3"
+                        onClick={() => navigate('/full-comparison')}
                       >
                         View Full Comparison
                       </Button>
@@ -96,11 +98,11 @@ const FinalRecommendation = ({ recommendation, selectedFeatures, onRestart }) =>
                       Choose Lovable only if you're deeply familiar with Supabase, want to custom-code everything, 
                       and don't mind stitching together multiple tools.
                     </p>
-                    <div className="flex flex-wrap justify-center gap-4 pt-4">
+<div className="flex flex-wrap justify-center gap-4 pt-4">
                       <Button 
                         variant="primary" 
-                        icon="ExternalLink"
-                        onClick={() => window.open('https://apper.io/prime-club', '_blank')}
+                        icon="BarChart3"
+                        onClick={() => navigate('/full-comparison')}
                       >
                         View Full Comparison
                       </Button>

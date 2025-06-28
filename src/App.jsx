@@ -3,14 +3,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import Layout from '@/components/organisms/Layout'
 import SaaSPathfinderPage from '@/components/pages/SaaSPathfinderPage'
+import FullComparisonPage from '@/components/pages/FullComparisonPage'
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-white">
+<div className="min-h-screen bg-white">
         <Layout>
           <Routes>
             <Route path="/" element={<SaaSPathfinderPage />} />
+            <Route path="/full-comparison" element={<FullComparisonPage />} />
           </Routes>
         </Layout>
         <ToastContainer

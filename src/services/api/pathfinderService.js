@@ -1,17 +1,22 @@
-import { featuresData, comparisonsData } from '@/services/mockData/pathfinderData'
+import { comparisonsData, featuresData, fullComparisonData } from "@/services/mockData/pathfinderData";
 
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+// Simulate API delay
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const getFeatures = async () => {
-  await delay(300)
-  return [...featuresData]
-}
+  await delay(300);
+  return [...featuresData];
+};
 
 export const getComparisons = async () => {
-  await delay(300)
-  return [...comparisonsData]
-}
+  await delay(400);
+  return [...comparisonsData];
+};
 
+export const getFullComparison = async () => {
+  await delay(200);
+  return [...fullComparisonData];
+};
 export const getFeatureById = async (id) => {
   await delay(200)
   const feature = featuresData.find(item => item.Id === parseInt(id))
