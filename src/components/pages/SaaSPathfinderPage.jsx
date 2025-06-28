@@ -19,8 +19,9 @@ const [features, setFeatures] = useState([])
   const [currentStep, setCurrentStep] = useState('selection')
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answeredQuestions, setAnsweredQuestions] = useState({})
-  const [visibleComparisons, setVisibleComparisons] = useState([])
+const [visibleComparisons, setVisibleComparisons] = useState([])
   const [finalRecommendation, setFinalRecommendation] = useState('')
+  const [showConfirmButton, setShowConfirmButton] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   useEffect(() => {
@@ -100,11 +101,15 @@ const handleContinue = () => {
       toast.success(`${selectedFeatures.length} features selected`)
     }
   }
-  const handleConfirmContinue = () => {
+const handleConfirmContinue = () => {
     setCurrentStep('comparison')
     toast.success(`Analyzing ${selectedFeatures.length} selected features`)
   }
 
+  const handleProceedToRecommendation = () => {
+    setCurrentStep('recommendation')
+    toast.success('Proceeding to final recommendation')
+  }
   const showComparisonsProgressively = () => {
     const relevantComparisons = comparisons.filter(comp => 
       selectedFeatures.includes(comp.featureId)
@@ -112,13 +117,19 @@ const handleContinue = () => {
 
     setVisibleComparisons([])
     
-    relevantComparisons.forEach((comparison, index) => {
+relevantComparisons.forEach((comparison, index) => {
       setTimeout(() => {
         setVisibleComparisons(prev => [...prev, comparison.featureId])
+        
+        // Show confirm button after all comparisons are visible
+        if (index === relevantComparisons.length - 1) {
+          setTimeout(() => {
+            setShowConfirmButton(true)
+          }, 500)
+        }
       }, index * 800)
     })
   }
-
 const calculateRecommendation = () => {
     const relevantComparisons = comparisons.filter(comp => 
       selectedFeatures.includes(comp.featureId)
@@ -140,11 +151,6 @@ const calculateRecommendation = () => {
         setFinalRecommendation('Lovable')
       }
     }
-
-    // Show final recommendation after all comparisons are visible
-    setTimeout(() => {
-      setCurrentStep('recommendation')
-    }, relevantComparisons.length * 800 + 1000)
   }
 
 const handleRestart = () => {
@@ -154,6 +160,7 @@ const handleRestart = () => {
     setAnsweredQuestions({})
     setVisibleComparisons([])
     setFinalRecommendation('')
+    setShowConfirmButton(false)
     toast.info('Starting fresh comparison')
   }
   const getSelectedFeatureLabels = () => {
@@ -295,7 +302,7 @@ const handleRestart = () => {
               </p>
             </div>
 
-            <div className="space-y-6">
+<div className="space-y-6">
               {comparisons
                 .filter(comp => selectedFeatures.includes(comp.featureId))
                 .map((comparison) => (
@@ -306,6 +313,32 @@ const handleRestart = () => {
                   />
                 ))}
             </div>
+
+            {/* Confirmation Button */}
+            <AnimatePresence>
+              {showConfirmButton && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="flex justify-center pt-8"
+                >
+                  <div className="text-center space-y-4">
+                    <p className="text-gray-600 max-w-md mx-auto">
+                      Analysis complete! Review the comparisons above and proceed when you're ready to see our recommendation.
+                    </p>
+                    <Button
+                      onClick={handleProceedToRecommendation}
+                      size="lg"
+                      className="flex items-center space-x-2"
+                    >
+                      <span>View Final Recommendation</span>
+                      <ApperIcon name="ArrowRight" size={16} />
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
 
