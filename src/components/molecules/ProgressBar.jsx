@@ -3,10 +3,11 @@ import { motion } from 'framer-motion'
 import ApperIcon from '@/components/ApperIcon'
 
 const ProgressBar = ({ currentStep }) => {
-  const steps = [
+const steps = [
     { id: 'selection', label: 'Select Features', number: 1 },
-    { id: 'comparison', label: 'Compare Options', number: 2 },
-    { id: 'recommendation', label: 'Get Recommendation', number: 3 }
+    { id: 'confirmation', label: 'Review Selection', number: 2 },
+    { id: 'comparison', label: 'Compare Options', number: 3 },
+    { id: 'recommendation', label: 'Get Recommendation', number: 4 }
   ]
 
   const getCurrentStepIndex = () => {
@@ -22,12 +23,13 @@ const ProgressBar = ({ currentStep }) => {
         <div className="absolute top-6 left-0 w-full h-0.5 bg-gray-200 z-0" />
         
         {/* Progress Line Fill */}
-        <motion.div 
+<motion.div 
           className="absolute top-6 left-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 z-10"
           initial={{ width: '0%' }}
           animate={{ 
             width: currentStepIndex === 0 ? '0%' : 
-                   currentStepIndex === 1 ? '50%' : '100%'
+                   currentStepIndex === 1 ? '33.33%' : 
+                   currentStepIndex === 2 ? '66.66%' : '100%'
           }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
         />
