@@ -153,14 +153,15 @@ export const comparisonsData = [
         lovableValue: 'Via Clerk integration',
         apperStatus: 'yes',
         lovableStatus: 'warning'
-      }
+}
     ],
     winner: 'Apper',
     reasoning: 'Apper offers 1,300+ pre-built integrations with one-click setup, native analytics, and built-in team management, compared to Lovable\'s limited 12 integrations and external tool requirements.'
-reasoning: 'Apper offers 1,300+ pre-built integrations with one-click setup, native analytics, and built-in team management, compared to Lovable\'s limited 12 integrations and external tool requirements.'
   }
 ]
-  {
+
+export const detailedComparisonsData = [
+{
     Id: 1,
     name: 'Development Experience',
     features: [
