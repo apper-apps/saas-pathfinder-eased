@@ -66,14 +66,26 @@ const FinalRecommendation = ({ recommendation, selectedFeatures, onRestart }) =>
                     <p className="text-gray-700 leading-relaxed">
                       Perfect for developers who want ease of use, speed to launch, and prefer built-in tools over custom coding.
                     </p>
-                    <div className="flex flex-wrap justify-center gap-4 pt-4">
-                      <Button variant="success" icon="ExternalLink">
+<div className="flex flex-wrap justify-center gap-4 pt-4">
+                      <Button 
+                        variant="success" 
+                        icon="ExternalLink"
+                        onClick={() => window.open('https://apper.io/prime-club', '_blank')}
+                      >
                         View Full Comparison
                       </Button>
-                      <Button variant="success" icon="Play">
+                      <Button 
+                        variant="success" 
+                        icon="Play"
+                        onClick={() => window.open('https://www.facebook.com/dev.hisaria/videos/964796448871134', '_blank')}
+                      >
                         Watch Apper Demo
                       </Button>
-                      <Button variant="secondary" icon="Zap">
+                      <Button 
+                        variant="secondary" 
+                        icon="Zap"
+                        onClick={() => window.open('https://apper.io/prime-club', '_blank')}
+                      >
                         Try Apper Free
                       </Button>
                     </div>
@@ -85,7 +97,11 @@ const FinalRecommendation = ({ recommendation, selectedFeatures, onRestart }) =>
                       and don't mind stitching together multiple tools.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4 pt-4">
-                      <Button variant="primary" icon="ExternalLink">
+                      <Button 
+                        variant="primary" 
+                        icon="ExternalLink"
+                        onClick={() => window.open('https://apper.io/prime-club', '_blank')}
+                      >
                         View Full Comparison
                       </Button>
                       <Button variant="secondary" icon="MessageCircle">
