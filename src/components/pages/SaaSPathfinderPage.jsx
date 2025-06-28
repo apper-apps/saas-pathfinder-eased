@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'react-toastify'
 import FeatureSelector from '@/components/organisms/FeatureSelector'
+import ProgressBar from '@/components/molecules/ProgressBar'
 import ComparisonSection from '@/components/organisms/ComparisonSection'
 import FinalRecommendation from '@/components/organisms/FinalRecommendation'
 import Loading from '@/components/ui/Loading'
@@ -144,8 +145,11 @@ const SaaSPathfinderPage = () => {
             Navigate through our feature-based roadmap to discover which platform matches your development needs. 
             Get personalized recommendations based on what matters most to your project.
           </p>
-        </motion.div>
+</motion.div>
       </div>
+
+      {/* Progress Bar */}
+      <ProgressBar currentStep={currentStep} />
 
       <AnimatePresence mode="wait">
         {currentStep === 'selection' && (
