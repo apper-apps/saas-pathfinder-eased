@@ -13,15 +13,16 @@ import { getComparisons, getFeatures } from "@/services/api/pathfinderService";
 import { comparisonsData, featuresData } from "@/services/mockData/pathfinderData";
 
 const SaaSPathfinderPage = () => {
-  const [features, setFeatures] = useState([])
+const [features, setFeatures] = useState([])
   const [comparisons, setComparisons] = useState([])
   const [selectedFeatures, setSelectedFeatures] = useState([])
   const [currentStep, setCurrentStep] = useState('selection')
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [answeredQuestions, setAnsweredQuestions] = useState({})
   const [visibleComparisons, setVisibleComparisons] = useState([])
   const [finalRecommendation, setFinalRecommendation] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-
   useEffect(() => {
     loadData()
   }, [])
@@ -53,12 +54,44 @@ const SaaSPathfinderPage = () => {
     }
   }
 
-  const handleFeatureToggle = (featureId) => {
-    setSelectedFeatures(prev => 
-      prev.includes(featureId)
-        ? prev.filter(id => id !== featureId)
-        : [...prev, featureId]
-    )
+const handleQuestionAnswer = (featureId, answer) => {
+    setAnsweredQuestions(prev => ({
+      ...prev,
+      [featureId]: answer
+    }))
+
+    if (answer) {
+      setSelectedFeatures(prev => 
+        prev.includes(featureId) ? prev : [...prev, featureId]
+      )
+    } else {
+      setSelectedFeatures(prev => prev.filter(id => id !== featureId))
+    }
+
+    // Auto-advance to next question after a short delay
+    setTimeout(() => {
+      if (currentQuestionIndex < features.length - 1) {
+        setCurrentQuestionIndex(prev => prev + 1)
+      } else {
+        // All questions answered, move to confirmation
+        setCurrentStep('confirmation')
+        const totalAnswered = Object.keys(answeredQuestions).length + 1
+        const selectedCount = Object.values({...answeredQuestions, [featureId]: answer}).filter(Boolean).length
+        toast.success(`All questions completed! ${selectedCount} features selected`)
+      }
+    }, 500)
+  }
+
+  const handlePreviousQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(prev => prev - 1)
+    }
+  }
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < features.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1)
+    }
   }
 
 const handleContinue = () => {
@@ -67,7 +100,6 @@ const handleContinue = () => {
       toast.success(`${selectedFeatures.length} features selected`)
     }
   }
-
   const handleConfirmContinue = () => {
     setCurrentStep('comparison')
     toast.success(`Analyzing ${selectedFeatures.length} selected features`)
@@ -115,14 +147,15 @@ const calculateRecommendation = () => {
     }, relevantComparisons.length * 800 + 1000)
   }
 
-  const handleRestart = () => {
+const handleRestart = () => {
     setSelectedFeatures([])
     setCurrentStep('selection')
+    setCurrentQuestionIndex(0)
+    setAnsweredQuestions({})
     setVisibleComparisons([])
     setFinalRecommendation('')
     toast.info('Starting fresh comparison')
   }
-
   const getSelectedFeatureLabels = () => {
     return features
       .filter(feature => selectedFeatures.includes(feature.id))
@@ -173,10 +206,14 @@ const calculateRecommendation = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <FeatureSelector
+<FeatureSelector
               features={features}
               selectedFeatures={selectedFeatures}
-              onFeatureToggle={handleFeatureToggle}
+              currentQuestionIndex={currentQuestionIndex}
+              answeredQuestions={answeredQuestions}
+              onQuestionAnswer={handleQuestionAnswer}
+              onPreviousQuestion={handlePreviousQuestion}
+              onNextQuestion={handleNextQuestion}
               onContinue={handleContinue}
               canContinue={selectedFeatures.length > 0}
             />
