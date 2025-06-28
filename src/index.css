@@ -1,0 +1,79 @@
+@import 'react-toastify/dist/ReactToastify.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  .toast-container {
+    font-size: 14px;
+    max-width: 400px;
+  }
+  
+  .toast-body {
+    padding: 8px 12px;
+  }
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-height: 48px;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #3B82F6, #2563EB);
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Custom checkbox styles */
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #D1D5DB;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+  background: linear-gradient(135deg, #5B21B6, #7C3AED);
+  border-color: #5B21B6;
+  transform: scale(0.95);
+}
+
+input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #5B21B6;
+  box-shadow: 0 0 0 3px rgba(91, 33, 182, 0.1);
+}
